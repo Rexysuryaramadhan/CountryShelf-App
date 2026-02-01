@@ -28,12 +28,14 @@
                         </div>
                     </form>
 
-                    <!-- Favorites Link -->
+                    <!-- Favorites Link - Only show if user is logged in -->
+                    @auth
                     <div class="mb-4">
                         <a href="{{ route('favorites.index') }}" class="btn btn-success">
                             View My Favorites ({{ Auth::user()->favorites->count() }})
                         </a>
                     </div>
+                    @endauth
 
                     <!-- Results Header -->
                     <h2 class="h4 mb-4">
@@ -68,7 +70,8 @@
                                             <p class="card-text"><strong>Population:</strong> {{ number_format($country['population']) }}</p>
                                         @endif
 
-                                        <!-- Add to favorites form -->
+                                        <!-- Add to favorites form - conditionally show based on auth status -->
+                                        @auth
                                         <form method="POST" action="{{ route('favorites.store') }}" class="mt-auto">
                                             @csrf
                                             <input type="hidden" name="country_name" value="{{ $country['name'] }}">
@@ -87,6 +90,13 @@
                                                 Add to Favorites
                                             </button>
                                         </form>
+                                        @else
+                                        <div class="mt-auto">
+                                            <a href="{{ route('login') }}" class="btn btn-primary w-100">
+                                                Login to Add to Favorites
+                                            </a>
+                                        </div>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

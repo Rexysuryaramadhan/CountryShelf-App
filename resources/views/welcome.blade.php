@@ -19,7 +19,7 @@
             <div class="text-center">
                 <h1 class="display-4 fw-bold text-primary">Welcome to CountryShelf</h1>
                 <p class="lead">Your favorite countries collection application</p>
-                <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Get Started</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-primary btn-lg">Explore Countries</a>
             </div>
         </div>
     </body>
