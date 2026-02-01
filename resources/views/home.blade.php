@@ -127,6 +127,64 @@
                     </div>
                 @endforelse
             </div>
+
+            <!-- Pagination -->
+            @if(!$searchQuery && $pagination)
+            <div class="d-flex justify-content-center mt-5">
+                <nav aria-label="Country pagination">
+                    <ul class="pagination">
+                        {{-- Previous Button --}}
+                        <li class="page-item {{ $pagination['current_page'] <= 1 ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $pagination['current_page'] > 1 ? request()->fullUrlWithQuery(['page' => $pagination['current_page'] - 1]) : '#' }}">
+                                <i class="fas fa-chevron-left me-1"></i>Sebelumnya
+                            </a>
+                        </li>
+
+                        {{-- First Page --}}
+                        @if($pagination['current_page'] > 3)
+                            <li class="page-item">
+                                <a class="page-link" href="{{ request()->fullUrlWithQuery(['page' => 1]) }}">1</a>
+                            </li>
+                            @if($pagination['current_page'] > 4)
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            @endif
+                        @endif
+
+                        {{-- Pages Around Current --}}
+                        @for($i = max(1, $pagination['current_page'] - 2); $i <= min($pagination['last_page'], $pagination['current_page'] + 2); $i++)
+                            <li class="page-item {{ $i == $pagination['current_page'] ? 'active' : '' }}">
+                                <a class="page-link" href="{{ request()->fullUrlWithQuery(['page' => $i]) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+
+                        {{-- Last Page --}}
+                        @if($pagination['current_page'] < $pagination['last_page'] - 2)
+                            @if($pagination['current_page'] < $pagination['last_page'] - 3)
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            @endif
+                            <li class="page-item">
+                                <a class="page-link" href="{{ request()->fullUrlWithQuery(['page' => $pagination['last_page']]) }}">{{ $pagination['last_page'] }}</a>
+                            </li>
+                        @endif
+
+                        {{-- Next Button --}}
+                        <li class="page-item {{ $pagination['current_page'] >= $pagination['last_page'] ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $pagination['current_page'] < $pagination['last_page'] ? request()->fullUrlWithQuery(['page' => $pagination['current_page'] + 1]) : '#' }}">
+                                Selanjutnya<i class="fas fa-chevron-right ms-1"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="text-center mt-3 text-muted">
+                Menampilkan {{ $pagination['from'] }} - {{ $pagination['to'] }} dari {{ $pagination['total'] }} negara
+            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

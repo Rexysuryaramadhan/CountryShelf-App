@@ -27,20 +27,36 @@ class HomeController extends Controller
         if ($searchQuery) {
             // Search for countries based on the query
             $countries = $this->countryService->searchCountryByName($searchQuery);
-        } else {
-            // Get all countries from the API
-            $countries = $this->countryService->getAllCountries();
-        }
 
-        // Format the country data
-        $formattedCountries = [];
-        foreach ($countries as $country) {
-            $formattedCountries[] = $this->countryService->formatCountryData($country);
+            // For search results, we don't paginate
+            $formattedCountries = [];
+            foreach ($countries as $country) {
+                $formattedCountries[] = $this->countryService->formatCountryData($country);
+            }
+
+            // Set pagination to null for search results
+            $pagination = null;
+        } else {
+            // Get paginated countries from the API
+            $page = $request->get('page', 1);
+            $perPage = 20; // Show 20 countries per page
+
+            $result = $this->countryService->getPaginatedCountries($page, $perPage);
+            $countries = $result['data'];
+
+            // Format the country data
+            $formattedCountries = [];
+            foreach ($countries as $country) {
+                $formattedCountries[] = $this->countryService->formatCountryData($country);
+            }
+
+            // Get pagination info
+            $pagination = $result['pagination'];
         }
 
         // Get user's favorites if logged in
         $favorites = Auth::check() ? Auth::user()->favorites : collect([]);
 
-        return view('home', compact('formattedCountries', 'favorites', 'searchQuery'));
+        return view('home', compact('formattedCountries', 'favorites', 'searchQuery', 'pagination'));
     }
 }

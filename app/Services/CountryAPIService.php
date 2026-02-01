@@ -72,6 +72,40 @@ class CountryAPIService
     }
 
     /**
+     * Get paginated countries from the API
+     *
+     * @param int $page
+     * @param int $perPage
+     * @return array
+     */
+    public function getPaginatedCountries(int $page = 1, int $perPage = 20): array
+    {
+        $allCountries = $this->getAllCountries();
+
+        // Calculate offset
+        $offset = ($page - 1) * $perPage;
+
+        // Slice the array to get the countries for the current page
+        $paginatedCountries = array_slice($allCountries, $offset, $perPage);
+
+        // Calculate total pages
+        $total = count($allCountries);
+        $lastPage = ceil($total / $perPage);
+
+        return [
+            'data' => $paginatedCountries,
+            'pagination' => [
+                'current_page' => $page,
+                'per_page' => $perPage,
+                'total' => $total,
+                'last_page' => $lastPage,
+                'from' => $offset + 1,
+                'to' => min($offset + $perPage, $total),
+            ]
+        ];
+    }
+
+    /**
      * Format country data for consistent use in the application
      *
      * @param array $countryData
