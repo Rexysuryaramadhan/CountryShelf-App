@@ -3,6 +3,7 @@
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,6 +11,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+// Route for testing API
+Route::get('/test-api', [TestController::class, 'testApi']);
 
 // Routes for favorites management - only these require auth
 Route::middleware('auth')->group(function () {

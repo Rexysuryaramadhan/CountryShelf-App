@@ -40,21 +40,35 @@ class HomeController extends Controller
             // Get all countries from the API
             $allCountries = $this->countryService->getAllCountries();
 
-            // Format the country data
-            $allFormattedCountries = [];
-            foreach ($allCountries as $country) {
-                $allFormattedCountries[] = $this->countryService->formatCountryData($country);
+            // Check if API returned any data
+            if (empty($allCountries)) {
+                // Return empty arrays if API fails
+                $formattedCountries = [];
+                $pagination = [
+                    'current_page' => 1,
+                    'per_page' => 20,
+                    'total' => 0,
+                    'last_page' => 1,
+                    'from' => 0,
+                    'to' => 0,
+                ];
+            } else {
+                // Format the country data
+                $allFormattedCountries = [];
+                foreach ($allCountries as $country) {
+                    $allFormattedCountries[] = $this->countryService->formatCountryData($country);
+                }
+
+                // Apply pagination to the formatted data
+                $page = intval($request->get('page', 1));
+                $perPage = 20; // Show 20 countries per page
+
+                $result = paginateArray($allFormattedCountries, $perPage, $page);
+                $formattedCountries = $result['data'];
+
+                // Get pagination info
+                $pagination = $result['pagination'];
             }
-
-            // Apply pagination to the formatted data
-            $page = intval($request->get('page', 1));
-            $perPage = 20; // Show 20 countries per page
-
-            $result = paginateArray($allFormattedCountries, $perPage, $page);
-            $formattedCountries = $result['data'];
-
-            // Get pagination info
-            $pagination = $result['pagination'];
         }
 
         // Get user's favorites if logged in

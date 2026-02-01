@@ -17,10 +17,14 @@ class CountryAPIService
     public function getAllCountries(): array
     {
         try {
-            $response = Http::timeout(30)->get($this->baseUrl . '/all');
+            $response = Http::timeout(30)->withHeaders([
+                'User-Agent' => 'CountryShelf App (contact@countryshelf.com)'
+            ])->get($this->baseUrl . '/all?fields=name,capital,region,population,flags');
 
             if ($response->successful()) {
-                return $response->json();
+                $data = $response->json();
+                Log::info('Successfully fetched countries from API', ['count' => count($data)]);
+                return $data;
             } else {
                 Log::error('Failed to fetch countries from API', [
                     'status' => $response->status(),
@@ -45,7 +49,9 @@ class CountryAPIService
     public function searchCountryByName(string $countryName): array
     {
         try {
-            $response = Http::timeout(30)->get($this->baseUrl . '/name/' . urlencode($countryName));
+            $response = Http::timeout(30)->withHeaders([
+                'User-Agent' => 'CountryShelf App (contact@countryshelf.com)'
+            ])->get($this->baseUrl . '/name/' . urlencode($countryName) . '?fields=name,capital,region,population,flags');
 
             if ($response->successful()) {
                 return $response->json();
