@@ -117,18 +117,19 @@ Aplikasi akan berjalan di `http://127.0.0.1:3000`
 - note
 - timestamps
 
-## Screenshot Aplikasi
-![Dashboard CountryShelf](screenshots/Laman Semua Negara.png)
-*Gambar 1: Tampilan dashboard aplikasi CountryShelf menampilkan daftar negara*
+## Tangkapan Layar (Screenshot)
 
-![Login Page](screenshots/Laman Login.png)
-*Gambar 2: Halaman login aplikasi CountryShelf*
+### Halaman Dashboard
+![Halaman Dashboard](screenshots/Laman%20Semua%20Negara.png)
 
-![Favorites Page](screenshots/Laman Negara Favorit.png)
-*Gambar 3: Halaman favorit menampilkan negara-negara yang disimpan pengguna*
+### Halaman Login
+![Halaman Login](screenshots/Laman%20Login.png)
 
-![Profile Page](screenshots/Laman Edit Profil.png)
-*Gambar 4: Halaman profil pengguna untuk mengelora informasi akun*
+### Halaman Negara Favorit
+![Halaman Negara Favorit](screenshots/Laman%20Negara%20Favorit.png)
+
+### Halaman Edit Profil
+![Halaman Edit Profil](screenshots/Laman%20Edit%20Profil.png)
 
 ## Kontribusi
 
