@@ -38,7 +38,7 @@ class HomeController extends Controller
             $pagination = null;
         } else {
             // Get paginated countries from the API
-            $page = $request->get('page', 1);
+            $page = intval($request->get('page', 1));
             $perPage = 20; // Show 20 countries per page
 
             $result = $this->countryService->getPaginatedCountries($page, $perPage);
