@@ -4,7 +4,7 @@
             <!-- Header Section -->
             <div class="header-gradient text-center mb-5">
                 <h1 class="display-4 fw-bold text-white">🌍 Country Shelf</h1>
-                <p class="lead text-white opacity-75">Discover and collect your favorite countries around the world</p>
+                <p class="lead text-white opacity-75">Temukan dan kumpulkan negara favoritmu di seluruh dunia</p>
             </div>
 
             <!-- Search Section -->
@@ -14,7 +14,7 @@
                         <input
                             type="text"
                             name="search"
-                            placeholder="🔍 Search for a country..."
+                            placeholder="🔍 Cari negara..."
                             value="{{ request('search') }}"
                             class="form-control form-control-lg"
                         >
@@ -24,7 +24,7 @@
                             type="submit"
                             class="btn btn-primary btn-lg w-100"
                         >
-                            <i class="fas fa-search me-2"></i>Search
+                            <i class="fas fa-search me-2"></i>Cari
                         </button>
                     </div>
                 </form>
@@ -35,9 +35,9 @@
                 <div class="col-md-8">
                     <h2 class="h4 mb-0">
                         @if(request('search'))
-                            <i class="fas fa-search me-2"></i>Search Results for "{{ request('search') }}"
+                            <i class="fas fa-search me-2"></i>Hasil Pencarian untuk "{{ request('search') }}"
                         @else
-                            <i class="fas fa-globe-americas me-2"></i>All Countries
+                            <i class="fas fa-globe-americas me-2"></i>Semua Negara
                         @endif
                     </h2>
                 </div>
@@ -46,7 +46,7 @@
                 @auth
                 <div class="col-md-4 text-md-end">
                     <a href="{{ route('favorites.index') }}" class="btn btn-outline-primary favorites-badge" data-count="{{ Auth::user()->favorites->count() }}">
-                        <i class="fas fa-heart me-2"></i>My Favorites
+                        <i class="fas fa-heart me-2"></i>Favoritku
                     </a>
                 </div>
                 @endauth
@@ -70,15 +70,15 @@
 
                                 <div class="country-stats">
                                     @if($country['capital'])
-                                        <p class="card-text mb-1"><i class="fas fa-city me-2 text-primary"></i><strong>Capital:</strong> {{ $country['capital'] }}</p>
+                                        <p class="card-text mb-1"><i class="fas fa-city me-2 text-primary"></i><strong>Ibukota:</strong> {{ $country['capital'] }}</p>
                                     @endif
 
                                     @if($country['region'])
-                                        <p class="card-text mb-1"><i class="fas fa-map-marker-alt me-2 text-success"></i><strong>Region:</strong> {{ $country['region'] }}</p>
+                                        <p class="card-text mb-1"><i class="fas fa-map-marker-alt me-2 text-success"></i><strong>Wilayah:</strong> {{ $country['region'] }}</p>
                                     @endif
 
                                     @if($country['population'])
-                                        <p class="card-text mb-0"><i class="fas fa-users me-2 text-info"></i><strong>Population:</strong> {{ number_format($country['population']) }}</p>
+                                        <p class="card-text mb-0"><i class="fas fa-users me-2 text-info"></i><strong>Penduduk:</strong> {{ number_format($country['population']) }}</p>
                                     @endif
                                 </div>
 
@@ -95,17 +95,17 @@
                                         type="submit"
                                         class="btn btn-primary w-100 btn-custom"
                                         onclick="event.preventDefault();
-                                                 if(confirm('Are you sure you want to add {{ addslashes($country['name']) }} to your favorites?')) {
+                                                 if(confirm('Apakah kamu yakin ingin menambahkan {{ addslashes($country['name']) }} ke favorit?')) {
                                                      this.closest('form').submit();
                                                  }"
                                     >
-                                        <i class="fas fa-heart me-2"></i>Add to Favorites
+                                        <i class="fas fa-heart me-2"></i>Tambah ke Favorit
                                     </button>
                                 </form>
                                 @else
                                 <div class="mt-auto">
                                     <a href="{{ route('login') }}" class="btn btn-primary w-100 btn-custom">
-                                        <i class="fas fa-sign-in-alt me-2"></i>Login to Add to Favorites
+                                        <i class="fas fa-sign-in-alt me-2"></i>Masuk untuk Menambahkan ke Favorit
                                     </a>
                                 </div>
                                 @endauth
@@ -118,10 +118,10 @@
                             <div class="mb-4">
                                 <i class="fas fa-globe-americas fa-5x text-muted"></i>
                             </div>
-                            <h3 class="h4 text-muted">No countries found</h3>
-                            <p class="text-muted">Try a different search term or explore all countries</p>
+                            <h3 class="h4 text-muted">Negara tidak ditemukan</h3>
+                            <p class="text-muted">Coba kata kunci pencarian yang berbeda atau jelajahi semua negara</p>
                             <a href="{{ route('dashboard') }}" class="btn btn-primary">
-                                <i class="fas fa-sync-alt me-2"></i>View All Countries
+                                <i class="fas fa-sync-alt me-2"></i>Lihat Semua Negara
                             </a>
                         </div>
                     </div>

@@ -3,20 +3,20 @@
         <div class="container">
             <!-- Header Section -->
             <div class="header-gradient text-center mb-5">
-                <h1 class="display-4 fw-bold text-white">❤️ My Favorites</h1>
-                <p class="lead text-white opacity-75">Your collection of favorite countries</p>
+                <h1 class="display-4 fw-bold text-white">❤️ Favoritku</h1>
+                <p class="lead text-white opacity-75">Koleksi negara favoritmu</p>
             </div>
 
             <div class="row mb-4">
                 <div class="col-md-8">
                     <h2 class="h4 mb-0">
-                        <i class="fas fa-heart me-2"></i>Your Favorite Countries
+                        <i class="fas fa-heart me-2"></i>Negara Favoritmu
                     </h2>
                 </div>
 
                 <div class="col-md-4 text-md-end">
                     <a href="{{ route('dashboard') }}" class="btn btn-outline-primary">
-                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                        <i class="fas fa-arrow-left me-2"></i>Kembali ke Dasbor
                     </a>
                 </div>
             </div>
@@ -43,21 +43,21 @@
 
                                     <div class="country-stats flex-grow-1">
                                         @if($favorite->capital)
-                                            <p class="card-text mb-1"><i class="fas fa-city me-2 text-primary"></i><strong>Capital:</strong> {{ $favorite->capital }}</p>
+                                            <p class="card-text mb-1"><i class="fas fa-city me-2 text-primary"></i><strong>Ibukota:</strong> {{ $favorite->capital }}</p>
                                         @endif
 
                                         @if($favorite->region)
-                                            <p class="card-text mb-1"><i class="fas fa-map-marker-alt me-2 text-success"></i><strong>Region:</strong> {{ $favorite->region }}</p>
+                                            <p class="card-text mb-1"><i class="fas fa-map-marker-alt me-2 text-success"></i><strong>Wilayah:</strong> {{ $favorite->region }}</p>
                                         @endif
 
                                         @if($favorite->population)
-                                            <p class="card-text mb-0"><i class="fas fa-users me-2 text-info"></i><strong>Population:</strong> {{ number_format($favorite->population) }}</p>
+                                            <p class="card-text mb-0"><i class="fas fa-users me-2 text-info"></i><strong>Penduduk:</strong> {{ number_format($favorite->population) }}</p>
                                         @endif
                                     </div>
 
                                     <!-- Note Section -->
                                     <div class="mt-3">
-                                        <label class="form-label fw-bold"><i class="fas fa-sticky-note me-2"></i>Your Note:</label>
+                                        <label class="form-label fw-bold"><i class="fas fa-sticky-note me-2"></i>Catatanmu:</label>
                                         <form method="POST" action="{{ route('favorites.update', $favorite) }}" class="mb-3">
                                             @csrf
                                             @method('PUT')
@@ -65,10 +65,10 @@
                                                 name="note"
                                                 rows="3"
                                                 class="form-control"
-                                                placeholder="Add your thoughts about this country..."
+                                                placeholder="Tambahkan pemikiranmu tentang negara ini..."
                                             >{{ $favorite->note }}</textarea>
                                             <button type="submit" class="btn btn-sm btn-primary mt-2">
-                                                <i class="fas fa-save me-1"></i>Save Note
+                                                <i class="fas fa-save me-1"></i>Simpan Catatan
                                             </button>
                                         </form>
                                     </div>
@@ -81,9 +81,9 @@
                                             <button
                                                 type="submit"
                                                 class="btn btn-danger w-100"
-                                                onclick="return confirm('Are you sure you want to remove {{ addslashes($favorite->country_name) }} from your favorites?')"
+                                                onclick="return confirm('Apakah kamu yakin ingin menghapus {{ addslashes($favorite->country_name) }} dari favorit?')"
                                             >
-                                                <i class="fas fa-trash me-2"></i>Remove
+                                                <i class="fas fa-trash me-2"></i>Hapus
                                             </button>
                                         </form>
                                     </div>
@@ -95,7 +95,7 @@
 
                 <div class="text-center mt-4">
                     <p class="text-muted">
-                        <i class="fas fa-heart me-2"></i>You have {{ $favorites->count() }} favorite country{{ $favorites->count() != 1 ? 's' : '' }}
+                        <i class="fas fa-heart me-2"></i>Kamu memiliki {{ $favorites->count() }} negara favorit
                     </p>
                 </div>
             @else
@@ -103,10 +103,10 @@
                     <div class="mb-4">
                         <i class="fas fa-heart-broken fa-5x text-muted"></i>
                     </div>
-                    <h3 class="h4 text-muted">No favorites yet</h3>
-                    <p class="text-muted">Start collecting your favorite countries by exploring the world</p>
+                    <h3 class="h4 text-muted">Belum ada favorit</h3>
+                    <p class="text-muted">Mulai mengumpulkan negara favoritmu dengan menjelajahi dunia</p>
                     <a href="{{ route('dashboard') }}" class="btn btn-primary">
-                        <i class="fas fa-globe-americas me-2"></i>Discover Countries
+                        <i class="fas fa-globe-americas me-2"></i>Jelajahi Negara
                     </a>
                 </div>
             @endif
