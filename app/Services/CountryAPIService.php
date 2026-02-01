@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class CountryAPIService
 {
@@ -16,13 +16,24 @@ class CountryAPIService
      */
     public function getAllCountries(): array
     {
-        $response = Http::get($this->baseUrl . '/all');
+        try {
+            $response = Http::timeout(30)->get($this->baseUrl . '/all');
 
-        if ($response->successful()) {
-            return $response->json();
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                Log::error('Failed to fetch countries from API', [
+                    'status' => $response->status(),
+                    'message' => $response->body()
+                ]);
+                return [];
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception occurred while fetching countries from API', [
+                'error' => $e->getMessage()
+            ]);
+            return [];
         }
-
-        return [];
     }
 
     /**
@@ -33,13 +44,31 @@ class CountryAPIService
      */
     public function searchCountryByName(string $countryName): array
     {
-        $response = Http::get($this->baseUrl . '/name/' . urlencode($countryName));
+        try {
+            $response = Http::timeout(30)->get($this->baseUrl . '/name/' . urlencode($countryName));
 
-        if ($response->successful()) {
-            return $response->json();
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                // If the country is not found, the API returns a 404
+                if ($response->status() === 404) {
+                    return [];
+                }
+
+                Log::error('Failed to search country from API', [
+                    'status' => $response->status(),
+                    'message' => $response->body(),
+                    'country_name' => $countryName
+                ]);
+                return [];
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception occurred while searching country from API', [
+                'error' => $e->getMessage(),
+                'country_name' => $countryName
+            ]);
+            return [];
         }
-
-        return [];
     }
 
     /**

@@ -13,7 +13,6 @@ class HomeController extends Controller
 
     public function __construct(CountryAPIService $countryService)
     {
-        $this->middleware('auth');
         $this->countryService = $countryService;
     }
 
