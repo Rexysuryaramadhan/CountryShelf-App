@@ -27,22 +27,6 @@
 
             <!-- Right side of navbar -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <!-- Search Form -->
-                <li class="nav-item me-3 d-none d-lg-block">
-                    <form method="GET" action="{{ route('dashboard') }}" class="d-flex">
-                        <input
-                            type="text"
-                            name="search"
-                            placeholder="Cari negara..."
-                            value="{{ request('search') }}"
-                            class="form-control form-control-sm me-2"
-                        >
-                        <button type="submit" class="btn btn-sm btn-outline-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </li>
-
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
