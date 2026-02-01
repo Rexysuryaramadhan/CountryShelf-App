@@ -145,10 +145,14 @@ class CountryAPIService
 
     private function extractCapital(array $data): string
     {
-        if (isset($data['capital']) && is_array($data['capital']) && !empty($data['capital'])) {
-            return $data['capital'][0];
+        if (isset($data['capital'])) {
+            if (is_array($data['capital']) && !empty($data['capital'])) {
+                return $data['capital'][0] ?? '';
+            } elseif (is_string($data['capital'])) {
+                return $data['capital'];
+            }
         }
-        return $data['capital'] ?? '';
+        return '';
     }
 
     private function extractRegion(array $data): string
