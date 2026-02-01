@@ -13,7 +13,6 @@ class HomeController extends Controller
 
     public function __construct(CountryAPIService $countryService)
     {
-        $this->middleware('auth');
         $this->countryService = $countryService;
     }
 
@@ -39,8 +38,8 @@ class HomeController extends Controller
             $formattedCountries[] = $this->countryService->formatCountryData($country);
         }
 
-        // Get user's favorites
-        $favorites = Auth::user()->favorites;
+        // Get user's favorites if logged in
+        $favorites = Auth::check() ? Auth::user()->favorites : collect([]);
 
         return view('home', compact('formattedCountries', 'favorites', 'searchQuery'));
     }
