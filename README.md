@@ -8,7 +8,7 @@ Aplikasi ini dirancang sebagai aplikasi multi-user, di mana setiap pengguna memi
 ## Teknologi yang Digunakan
 - Framework: Laravel 12
 - Bahasa Pemrograman: PHP 8.3
-- Database: SQLite
+- Database: SQLite (dapat dikonfigurasi ke MySQL/PostgreSQL untuk produksi)
 - Frontend: Blade Template + Bootstrap 5
 - Autentikasi: Laravel Breeze (Login/Registration)
 - API Client: Laravel HTTP Client
@@ -128,7 +128,7 @@ Aplikasi akan berjalan di `http://127.0.0.1:3000`
 *Gambar 3: Halaman favorit menampilkan negara-negara yang disimpan pengguna*
 
 ![Profile Page](screenshots/Laman Edit Profil.png)
-*Gambar 4: Halaman profil pengguna untuk mengelola informasi akun*
+*Gambar 4: Halaman profil pengguna untuk mengelora informasi akun*
 
 ## Kontribusi
 
