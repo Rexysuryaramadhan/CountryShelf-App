@@ -6,13 +6,40 @@ CountryShelf adalah aplikasi web berbasis Laravel yang digunakan untuk menampilk
 Aplikasi ini dirancang sebagai aplikasi multi-user, di mana setiap pengguna memiliki akun sendiri dan hanya dapat mengelola data favorit miliknya.
 
 ## Teknologi yang Digunakan
-- Framework: Laravel
-- Bahasa Pemrograman: PHP
+- Framework: Laravel 12
+- Bahasa Pemrograman: PHP 8.3
 - Database: SQLite
-- Frontend: Blade Template + Bootstrap
-- Autentikasi: Laravel Session
+- Frontend: Blade Template + Bootstrap 5
+- Autentikasi: Laravel Breeze (Login/Registration)
 - API Client: Laravel HTTP Client
 - Version Control: Git & GitHub
+- Font Awesome: untuk ikon
+
+## Sumber Data (Public API)
+### Nama API
+REST Countries API (https://restcountries.com/)
+
+### Endpoint yang Digunakan
+- Get All Countries: GET https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags
+- Get Country by Name (Search): GET https://restcountries.com/v3.1/name/{countryName}?fields=name,capital,region,population,flags
+
+### Data yang Digunakan dari API
+- Nama negara
+- Bendera (SVG/PNG)
+- Ibu kota
+- Region
+- Populasi
+
+## Fitur-fitur
+- Registrasi dan login pengguna (multi-user)
+- Menampilkan daftar negara dari Public API dengan pagination (20 negara per halaman)
+- Pencarian negara secara real-time
+- Menyimpan negara favorit ke database lokal
+- Menambahkan catatan pribadi pada negara favorit
+- Mengedit dan menghapus data favorit
+- Sistem isolasi data (user hanya bisa mengakses favorit miliknya sendiri)
+- Tampilan responsif yang kompatibel dengan berbagai perangkat
+- Tampilan dalam bahasa Indonesia
 
 ## Instalasi
 
@@ -70,40 +97,9 @@ npm run build
 php artisan serve
 ```
 
-Aplikasi akan berjalan di `http://127.0.0.1:8000`
-
-## Fitur-fitur
-
-1. **Autentikasi Pengguna (Multi-User)**
-   - Registrasi dan login pengguna
-   - Logout pengguna
-   - Keamanan password
-
-2. **Pengambilan Data dari Public API**
-   - Menampilkan daftar negara dari REST Countries API
-   - Pencarian negara berdasarkan nama
-
-3. **Manajemen Data Favorit (CRUD Lokal)**
-   - Menyimpan negara favorit
-   - Melihat daftar favorit
-   - Mengedit catatan pribadi
-   - Menghapus data favorit
-
-4. **Isolasi Data**
-   - Data favorit milik satu pengguna tidak bisa diakses pengguna lain
-   - Setiap operasi CRUD dibatasi berdasarkan user_id
-
-## Cara Penggunaan
-
-1. Register akun baru atau login jika sudah memiliki akun
-2. Kunjungi halaman dashboard untuk melihat daftar semua negara
-3. Gunakan fitur pencarian untuk mencari negara tertentu
-4. Klik tombol "Add to Favorites" untuk menyimpan negara ke koleksi Anda
-5. Kunjungi halaman "My Favorites" untuk melihat, mengedit, atau menghapus negara favorit Anda
-6. Tambahkan catatan pribadi untuk setiap negara favorit
+Aplikasi akan berjalan di `http://127.0.0.1:3000`
 
 ## Struktur Database
-
 ### Tabel: users
 - id
 - name
@@ -121,11 +117,18 @@ Aplikasi akan berjalan di `http://127.0.0.1:8000`
 - note
 - timestamps
 
-## Sumber Data API
+## Screenshot Aplikasi
+![Dashboard CountryShelf](screenshots/dashboard.png)
+*Gambar 1: Tampilan dashboard aplikasi CountryShelf menampilkan daftar negara*
 
-Aplikasi ini menggunakan REST Countries API:
-- Endpoint: https://restcountries.com/v3.1/all (untuk semua negara)
-- Endpoint: https://restcountries.com/v3.1/name/{countryName} (untuk pencarian)
+![Login Page](screenshots/login.png)
+*Gambar 2: Halaman login aplikasi CountryShelf*
+
+![Favorites Page](screenshots/favorites.png)
+*Gambar 3: Halaman favorit menampilkan negara-negara yang disimpan pengguna*
+
+![Profile Page](screenshots/profile.png)
+*Gambar 4: Halaman profil pengguna untuk mengelola informasi akun*
 
 ## Kontribusi
 
@@ -137,5 +140,5 @@ Proyek ini dilisensikan di bawah lisensi MIT.
 
 ## Informasi Kontak
 
-Nama: [Nama Mahasiswa]
-NIM: [Nomor Induk Mahasiswa]
+Nama: Rexy Surya Ramadhan
+NIM: 2307010
