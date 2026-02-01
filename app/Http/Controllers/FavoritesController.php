@@ -21,6 +21,10 @@ class FavoritesController extends Controller
      */
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to view your favorites.');
+        }
+
         $favorites = Auth::user()->favorites;
         return view('favorites.index', compact('favorites'));
     }
@@ -30,6 +34,10 @@ class FavoritesController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to add favorites.');
+        }
+
         $request->validate([
             'country_name' => 'required|string|max:255',
             'capital' => 'nullable|string|max:255',
@@ -61,6 +69,10 @@ class FavoritesController extends Controller
      */
     public function update(Request $request, Favorite $favorite)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to update favorites.');
+        }
+
         // Ensure the user owns this favorite
         if ($favorite->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
@@ -82,6 +94,10 @@ class FavoritesController extends Controller
      */
     public function destroy(Favorite $favorite)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login to remove favorites.');
+        }
+
         // Ensure the user owns this favorite
         if ($favorite->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
