@@ -53,7 +53,7 @@
             </div>
 
             <!-- Countries Grid -->
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 @forelse($formattedCountries as $country)
                     <div class="col">
                         <div class="card card-custom country-card h-100">
