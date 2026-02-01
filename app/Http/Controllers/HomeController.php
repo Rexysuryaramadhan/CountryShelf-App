@@ -37,18 +37,21 @@ class HomeController extends Controller
             // Set pagination to null for search results
             $pagination = null;
         } else {
-            // Get paginated countries from the API
+            // Get all countries from the API
+            $allCountries = $this->countryService->getAllCountries();
+
+            // Format the country data
+            $allFormattedCountries = [];
+            foreach ($allCountries as $country) {
+                $allFormattedCountries[] = $this->countryService->formatCountryData($country);
+            }
+
+            // Apply pagination to the formatted data
             $page = intval($request->get('page', 1));
             $perPage = 20; // Show 20 countries per page
 
-            $result = $this->countryService->getPaginatedCountries($page, $perPage);
-            $countries = $result['data'];
-
-            // Format the country data
-            $formattedCountries = [];
-            foreach ($countries as $country) {
-                $formattedCountries[] = $this->countryService->formatCountryData($country);
-            }
+            $result = paginateArray($allFormattedCountries, $perPage, $page);
+            $formattedCountries = $result['data'];
 
             // Get pagination info
             $pagination = $result['pagination'];
